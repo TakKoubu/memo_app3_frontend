@@ -1,5 +1,8 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  server: {
+    port: 3000
+  },
   head: {
     title: 'frontend',
     htmlAttrs: {
@@ -35,8 +38,16 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
-
+  proxy: {
+    '/api': {
+      target: 'http://localhost:5000',
+      pathRewrite: {
+        '^/api' : '/api'
+      }
+    }
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
@@ -45,5 +56,22 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  auth: {
+    redirect: {
+        login: '/users/login',
+        logout: '/',
+        callback: false,
+        home: '/users/profile',
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/v1/auth/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/api/v1/auth/logout', method: 'post' },
+          user: false,
+        },
+      }
+    }
   }
 }
