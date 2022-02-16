@@ -10,6 +10,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "TheHeader",
+};
+</script>
+
 <style scoped>
 .header-list {
   height: 40px;
