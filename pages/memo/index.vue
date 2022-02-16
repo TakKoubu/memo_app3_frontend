@@ -1,6 +1,6 @@
 <template>
   <section>
-    <MemoPreview v-for="memo in loadedMemos" :key="memo.id" :memo="memo" />
+    <MemoPreview v-for="memo in loadedMemos" :key="memo.memo_id" :memo="memo" />
   </section>
 </template>
 
