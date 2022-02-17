@@ -3,6 +3,7 @@
     {{ memo.id }}
     {{ memo.content }}
     <button @click="deleteMemo(memo)">削除</button>
+    <button @click="addFavo(memo)">いいね</button>
   </div>
 </template>
 
@@ -18,6 +19,11 @@ export default {
   methods: {
     deleteMemo(memo) {
       this.$store.dispatch("deleteMemo", memo.id).then(() => {
+        this.$router.push("/memo");
+      });
+    },
+    addFavo(memo) {
+      this.$store.dispatch("addFavo", memo.id).then(() => {
         this.$router.push("/memo");
       });
     },
