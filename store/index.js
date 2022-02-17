@@ -17,6 +17,16 @@ const createStore = () => {
       deleteMemo(state, id){
         const index = state.loadedMemos.findIndex((v) => v.id === id);
         state.loadedMemos.splice(index, 1);
+      },
+      addFavo(state, { id, favoriteCount }){
+        // loadedMemosのIDを特定する
+        const index = state.loadedMemos.findIndex((v) => v.id === id)
+        // IDを元にmemoのデータをとってくる
+        const memo = state.loadedMemos[index]
+        //　そのメモのfavorite_countにactionからとってきたfavoriteCountを代入
+        memo.favorite_count = favoriteCount
+        //　メモをspliceで入れ替える
+        state.loadedMemos.splice(index, 1, memo)
       }
     },
     actions: {
@@ -40,6 +50,13 @@ const createStore = () => {
         .delete(`${url}/memos/${id}`)
         .then(res => {
           commit("deleteMemo", id);
+        })
+      },
+      addFavo({commit}, id) {
+        return this.$axios
+        .post(`${url}/memos/${id}/favorites`)
+        .then(res => {
+          commit("addFavo", { id, favoriteCount: res.data.favorite_count });
         })
       }
     },
