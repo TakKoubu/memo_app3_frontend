@@ -3,8 +3,8 @@
     {{ memo.id }}
     {{ memo.content }}
     <button @click="deleteMemo(memo)">削除</button>
-    <button @click="addFavo(memo)">いいね</button>
-    <button @click="unFavo(memo)">いいね解除</button>
+    <button v-if="memo.is_like" @click="unFavo(memo)">いいね解除</button>
+    <button v-else @click="addFavo(memo)">いいね</button>
     {{ memo.favorite_count }}いいね
   </div>
 </template>
