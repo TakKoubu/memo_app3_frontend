@@ -5,6 +5,7 @@
     <button @click="deleteMemo(memo)">削除</button>
     <button @click="addFavo(memo)">いいね</button>
     <button @click="unFavo(memo)">いいね解除</button>
+    {{ memo.favorite_count }}いいね
   </div>
 </template>
 
