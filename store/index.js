@@ -25,6 +25,8 @@ const createStore = () => {
         const memo = state.loadedMemos[index]
         //　そのメモのfavorite_countにactionからとってきたfavoriteCountを代入
         memo.favorite_count = favoriteCount
+        // is_likeをtrueにする
+        memo.is_like = true
         //　メモをspliceで入れ替える
         state.loadedMemos.splice(index, 1, memo)
       },
@@ -35,6 +37,8 @@ const createStore = () => {
         const memo = state.loadedMemos[index]
         //　そのメモのfavorite_countにactionからとってきたfavoriteCountを代入
         memo.favorite_count = favoriteCount
+        // is_likeをfalseにする
+        memo.is_like = false
         //　メモをspliceで入れ替える
         state.loadedMemos.splice(index, 1, memo)
       }
